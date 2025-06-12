@@ -1,0 +1,17 @@
+ARG DOCKER_AIRFLOW_VERSION=3.0.2-python3.9
+FROM apache/airflow:${DOCKER_AIRFLOW_VERSION}
+
+USER root
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+USER airflow
+
+RUN pip install apache-airflow-providers-fab
+COPY requirements.txt /opt/requirements.txt
+RUN pip install --no-cache-dir -r /opt/requirements.txt
+
+
+ENTRYPOINT ["/entrypoint.sh"]

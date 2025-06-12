@@ -1,0 +1,6 @@
+apache-airflow-providers-fab
+apache-airflow-providers-amazon
+boto3
+psycopg2-binary
+asyncpg
+pandas
