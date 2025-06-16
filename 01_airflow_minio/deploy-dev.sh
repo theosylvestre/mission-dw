@@ -1,1 +1,2 @@
-docker-compose up --build docker-compose-dev.yml
+## docker compose -f docker-compose-dev.yml --env-file .env up --build
+## docker-compose -f docker-compose-dev.yml down -v
