@@ -11,8 +11,6 @@ services:
             MINIO_PORT: ${DOCKER_MINIO_PORT}
             MINIO_CONSOLE_PORT: ${DOCKER_MINIO_CONSOLE_PORT}
         command: server /data --console-address ":9001"
-        volumes:
-            - minio_data:/data
 
     mc:
         container_name: ${DOCKER_MINIO_MC_HOSTNAME}
@@ -57,6 +55,7 @@ services:
             AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
             AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_POSTGRES_HOSTNAME}:5432/${POSTGRES_DB}
             AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
+            AIRFLOW__CORE__LOAD_EXAMPLES: ${AIRFLOW__CORE__LOAD_EXAMPLES}
         depends_on:
             postgres:
                 condition: service_healthy
@@ -73,11 +72,6 @@ services:
             AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
             AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_POSTGRES_HOSTNAME}:5432/${POSTGRES_DB}
             AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
-            MINIO_BUCKET_ACCESS_KEY_ID: ${MINIO_BUCKET_ACCESS_KEY_ID}
-            MINIO_BUCKET_SECRET_ACCESS_KEY: ${MINIO_BUCKET_SECRET_ACCESS_KEY}
-            BUCKET_ENDPOINT_URL: ${BUCKET_ENDPOINT_URL}
-            DOCKER_MINIO_HOSTNAME: ${DOCKER_MINIO_HOSTNAME}
-            DOCKER_MINIO_PORT: ${DOCKER_MINIO_PORT}
         ports:
             - "${DOCKER_AIRFLOW_APISERVER_PORT}:8080"
         depends_on:
@@ -100,11 +94,7 @@ services:
             AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
             AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_POSTGRES_HOSTNAME}:5432/${POSTGRES_DB}
             AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
-            MINIO_BUCKET_ACCESS_KEY_ID: ${MINIO_BUCKET_ACCESS_KEY_ID}
-            MINIO_BUCKET_SECRET_ACCESS_KEY: ${MINIO_BUCKET_SECRET_ACCESS_KEY}
-            BUCKET_ENDPOINT_URL: ${BUCKET_ENDPOINT_URL}
-            DOCKER_MINIO_HOSTNAME: ${DOCKER_MINIO_HOSTNAME}
-            DOCKER_MINIO_PORT: ${DOCKER_MINIO_PORT}
+            AIRFLOW__CORE__LOAD_EXAMPLES: ${AIRFLOW__CORE__LOAD_EXAMPLES}
         depends_on:
             postgres:
                 condition: service_healthy
@@ -117,9 +107,40 @@ services:
             api-server:
                 condition: service_started
 
-    # triggerer:
+    triggerer:
+        container_name: ${DOCKER_AIRFLOW_TRIGGERER_HOSTNAME}
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: "triggerer"
+        environment:
+            AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
+            AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_POSTGRES_HOSTNAME}:5432/${POSTGRES_DB}
+            AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
+        depends_on:
+            postgres:
+                condition: service_healthy
+            airflow-init:
+                condition: service_completed_successfully
 
-    # dag-processor:
+
+    dag-processor:
+        container_name: ${DOCKER_AIRFLOW_DAGPROCESSOR_HOSTNAME}
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: "dag-processor"
+        environment:
+            AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
+            AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DOCKER_POSTGRES_HOSTNAME}:5432/${POSTGRES_DB}
+            AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
+            AIRFLOW__CORE__LOAD_EXAMPLES: ${AIRFLOW__CORE__LOAD_EXAMPLES}
+        depends_on:
+            postgres:
+                condition: service_healthy
+            airflow-init:
+                condition: service_completed_successfully
+
 
     redis:
         container_name: ${DOCKER_REDIS_HOSTNAME}

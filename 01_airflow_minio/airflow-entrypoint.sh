@@ -21,8 +21,8 @@ case "$1" in
     airflow db migrate
     ;;
 
-  scheduler|webserver|api-server)
-    sync_dags
+  scheduler|webserver|api-server|triggerer|dag-processor)
+    # sync_dags
     echo "✅ Lancement d'Airflow : $@"
     exec airflow "$@"
     ;;
