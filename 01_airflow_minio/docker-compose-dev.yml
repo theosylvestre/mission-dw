@@ -1,9 +1,7 @@
 ---
 x-airflow-common:
   &airflow-common
-  build:
-    context: .
-    dockerfile: Dockerfile
+  image: airflow-snefmaintenance:latest
   environment:
     &airflow-common-env
     # Database & Core

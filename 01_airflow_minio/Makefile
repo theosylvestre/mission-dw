@@ -1,3 +1,6 @@
+build:
+	docker build -t airflow-snefmaintenance:latest .
+
 init: docker-compose-dev.yml
 	docker-compose -f docker-compose-dev.yml up -d --build
 
