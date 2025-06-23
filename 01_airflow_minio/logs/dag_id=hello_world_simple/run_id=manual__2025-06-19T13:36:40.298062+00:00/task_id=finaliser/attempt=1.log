@@ -1,5 +1,0 @@
-{"timestamp":"2025-06-19T13:36:46.393961","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
-{"timestamp":"2025-06-19T13:36:46.394599","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/bonjour_monde.py","logger":"airflow.models.dagbag.DagBag"}
-{"timestamp":"2025-06-19T13:36:46.445447Z","level":"info","event":"📊 Résultats finaux : {'statut': 'traitement_termine', 'nb_lignes': 1000, 'timestamp': '2025-06-19T13:36:43.730162'}","chan":"stdout","logger":"task"}
-{"timestamp":"2025-06-19T13:36:46.445957Z","level":"info","event":"🎉 Workflow terminé avec succès !","chan":"stdout","logger":"task"}
-{"timestamp":"2025-06-19T13:36:46.446136","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator"}
