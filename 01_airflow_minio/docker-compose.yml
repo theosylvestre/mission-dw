@@ -173,7 +173,6 @@ services:
 
   worker:
     <<: *airflow-common
-    # container_name: ${DOCKER_AIRFLOW_WORKER_HOSTNAME}
     command: celery-worker
     # ports:
     #   - "8793:8793"
