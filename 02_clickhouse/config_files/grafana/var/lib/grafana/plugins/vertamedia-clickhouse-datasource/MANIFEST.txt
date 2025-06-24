@@ -1,0 +1,46 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "vertamedia",
+  "signedByOrgName": "Vertamedia",
+  "plugin": "vertamedia-clickhouse-datasource",
+  "version": "3.3.1",
+  "time": 1735321760002,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "go_plugin_build_manifest": "4e5c466aea00496634859b95fd19679d145c799aaef90b8f177629b7a4e47a1b",
+    "altinity-clickhouse-plugin_darwin_amd64": "4e3fd0e8fb911fbd72cd9cd4edcdcf9f5aa7bd8e612f6a9b21d18f86a9e0272f",
+    "altinity-clickhouse-plugin_linux_arm64": "705f3c65e12ac56de089a620d8cb3250deff00e109e44b6cc0eae2ded6fa4ecf",
+    "altinity-clickhouse-plugin_windows_amd64.exe": "cf883b016b7fbb3a5e0c56a9e0ee160f97c223f7a61862683c70540176c20938",
+    "LICENSE": "1c9e6884726a2b6231e089c028974e78adfee1648037cd94782bfae30ed99789",
+    "CHANGELOG.md": "78e87c26dd318b2c0dff54bf5a39dcc4475f6bcf27dbef8e193fb9fc28a033b3",
+    "altinity-clickhouse-plugin_linux_arm": "c66154d9a52cf682b4ae3ec945d28428955ce44953ccf8aa49bff5035da973e3",
+    "plugin.json": "5f68d520c019dfd16fe55a72e44d0bacf32d7bfd698ce3bff4827aae0b611b60",
+    "module.js.map": "69033b773c18f9c0bfb9fd76199b4e92cf210a318c040ada37332c12d5295773",
+    "README.md": "b5da25cb99d6ce9243eb5c0e813c385fc95c56bf6aa1be0f3239a4a7b0a6e657",
+    "img/datasource.png": "b0f62652ba3e6b30483d9a563c3d9f4f47aae5b6e4fe6624f82c1789619843c9",
+    "img/annotations.png": "34fc4ed1e31a31352ea9e84084cce6b30d4dc61e6d16f337dc14c3124b67f502",
+    "img/altinity_logo.svg": "ac91e3cd9163b1782615c3367d16581c84c16247b656d4625eeb6ffd9186cc5e",
+    "img/query_editor.png": "2e84ef036960bebb77f6a1bea0f6fd445531e6c647281ddd7c2cde7e0a91281b",
+    "img/query_settings.png": "7a4c9693974567ccb9ebb3172a31eb6ce1ea87bdfdae8269127076a4322af83f",
+    "img/histogram.png": "b164498cb267d2dcd57bcef47df24052a4d5517c3d3833a6a18227238273223e",
+    "module.js": "8af8d301fadbcf8a3f41a5caedc29cf695847301f2caec5625178d07cffc5449",
+    "altinity-clickhouse-plugin_linux_amd64": "b4c1c88feae807e685c00ba08a5147784e3ae452730970e0d69cc3b4753ec93e",
+    "altinity-clickhouse-plugin_darwin_arm64": "fb96235b0e00493ca7c6ba83974c578ef39ec7945f6a6d39200742c55597c388"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.11
+Comment: https://openpgpjs.org
+
+wrkEARMKAAYFAmdu6KAAIQkQfk0ManCIZucWIQTzOyW2kQdOhGNlcPN+TQxq
+cIhm55oUAgkBG2A+8vVCWEp5BqFrbCOj9oSuQKZ0m7JU5HZxHxpvfdCuJch5
+13U6WmGB4z0qavdFptr/D9WDiJWq4qc0ij/p+wgCCQGfdY5erqLw6z99kXxr
+txD78CDGuTQJwpoWzRe+UYA21NqpW5ul97XYzHVaDz/DnEnllZulM9wI9maO
+NCFhxfN+bA==
+=jDUr
+-----END PGP SIGNATURE-----
