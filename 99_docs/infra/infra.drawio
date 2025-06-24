@@ -1,0 +1,187 @@
+<mxfile host="65bd71144e">
+    <diagram id="z9eKcsQ0bkTf8BDqbd8B" name="Page-1">
+        <mxGraphModel dx="1495" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="15" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 12;strokeColor=light-dark(#24b8eb, #ededed);fillColor=none;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="241.20999999999998" y="40" width="480" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="405" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="251.20999999999998" y="50" width="48.79" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="airflow-apiserver" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="85" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="airflow-dagprocessor" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="165" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="airflow-sheduler" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="245" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="airflow-postgres" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="325" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="airflow-worker" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="432.91999999999996" y="415" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="airflow-redis" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="325" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="airflow-minio" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="245" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="airflow-minio-mc" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="165" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="airflow-triggerer" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="279.50999999999993" y="245" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="airflow-init" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="562.9200000000001" y="85" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="01_airflow/docker-compose-dev.yml" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=light-dark(#24b8eb, #ededed);" vertex="1" parent="1">
+                    <mxGeometry x="240" y="20" width="201.21" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 12;strokeColor=light-dark(#24b8eb, #ededed);fillColor=none;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="241.20999999999998" y="600" width="480" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="965" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="251.20999999999998" y="610" width="48.79" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="airflow-apiserver" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="645" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="airflow-dagprocessor" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="725" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="airflow-sheduler" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="airflow-postgres" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="422.91999999999996" y="885" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="airflow-worker" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="432.91999999999996" y="975" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="airflow-redis" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="885" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="airflow-minio" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="airflow-minio-mc" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.92" y="725" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="airflow-triggerer" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="279.50999999999993" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="airflow-init" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="562.9200000000001" y="645" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="02_clickhouse/docker-compose-dev.yml" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=light-dark(#24b8eb, #ededed);" vertex="1" parent="1">
+                    <mxGeometry x="240" y="580" width="220" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="" style="shape=actor;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="120" y="280" width="30" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 12;strokeColor=light-dark(#FF6666,#EDEDED);fillColor=none;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="961.21" y="40" width="698.79" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1380" y="405" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="971.21" y="50" width="48.79" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="airflow-apiserver&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;[8080:8080]&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1150" y="290" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="airflow-dagprocessor" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="245" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="airflow-sheduler" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1380" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="airflow-postgres" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1150" y="370" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="airflow-worker" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="415" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="airflow-redis" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="325" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="airflow-minio&lt;div&gt;[9000:9000]&lt;/div&gt;&lt;div&gt;[9001:9001]&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1150" y="210" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="airflow-minio-mc" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="1282.92" y="100" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="airflow-triggerer" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="165" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="airflow-init" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="1520" y="430" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="01_airflow/docker-compose-dev.yml" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=light-dark(#FF6666,#EDEDED);" vertex="1" parent="1">
+                    <mxGeometry x="960" y="20" width="201.21" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 12;strokeColor=light-dark(#FF6666,#EDEDED);fillColor=none;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="961.21" y="600" width="480" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1142.92" y="965" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="971.21" y="610" width="48.79" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="airflow-apiserver" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1142.92" y="645" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="airflow-dagprocessor" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1142.92" y="725" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="airflow-sheduler" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1142.92" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="airflow-postgres" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1142.92" y="885" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="airflow-worker" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1152.92" y="975" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="airflow-redis" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1282.92" y="885" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="airflow-minio" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1282.92" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="airflow-minio-mc" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1282.92" y="725" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="airflow-triggerer" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="999.51" y="805" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="airflow-init" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="1282.92" y="645" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="62" value="02_clickhouse/docker-compose-dev.yml" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=light-dark(#FF6666,#EDEDED);" vertex="1" parent="1">
+                    <mxGeometry x="960" y="580" width="220" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" value="" style="shape=actor;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="850" y="255" width="30" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="traefik&lt;div&gt;[443:443]&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Roboto;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DRoboto;" vertex="1" parent="1">
+                    <mxGeometry x="999.51" y="250" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
