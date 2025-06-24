@@ -1,0 +1,10 @@
+apache-airflow-providers-fab
+apache-airflow-providers-amazon
+boto3
+asyncpg
+pandas
+psycopg2-binary
+apache-airflow-providers-celery>=3.3.0
+apache-airflow-providers-sftp>=5.3.1
+dbt-core
+dbt-clickhouse

@@ -1,0 +1,188 @@
+---
+x-airflow-common:
+  &airflow-common
+  image: airflow-snefmaintenance:latest
+  environment:
+    &airflow-common-env
+    # Database & Core
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: ${AIRFLOW__DATABASE__SQL_ALCHEMY_CONN}
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW__CORE__FERNET_KEY}
+    AIRFLOW__CORE__AUTH_MANAGER: ${AIRFLOW__CORE__AUTH_MANAGER}
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: ${AIRFLOW__CORE__EXECUTION_API_SERVER_URL}
+    AIRFLOW__CORE__LOAD_EXAMPLES: ${AIRFLOW__CORE__LOAD_EXAMPLES}
+    AIRFLOW__CORE__EXECUTOR: ${AIRFLOW__CORE__EXECUTOR}
+    
+    # Security & Auth
+    AIRFLOW__API__SECRET_KEY: ${AIRFLOW__API__SECRET_KEY}
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
+    
+    # Celery
+    AIRFLOW__CELERY__BROKER_URL: ${AIRFLOW__CELERY__BROKER_URL}
+    AIRFLOW__CELERY__RESULT_BACKEND: ${AIRFLOW__CELERY__RESULT_BACKEND}
+    
+    # DAG Processing
+    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL: ${AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL}
+    
+    # Logging
+    AIRFLOW__LOGGING__REMOTE_LOGGING: ${AIRFLOW__LOGGING__REMOTE_LOGGING}
+    AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID: ${AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID}
+    AIRFLOW__LOGGING__DELETE_LOCAL_LOGS: ${AIRFLOW__LOGGING__DELETE_LOCAL_LOGS}
+    AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER: ${AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER}
+    AIRFLOW__LOGGING__S3_LOG_WRITE_HEAD_OBJECT: ${AIRFLOW__LOGGING__S3_LOG_WRITE_HEAD_OBJECT}
+    AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS: ${AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS}
+    
+    # Worker log server
+    AIRFLOW__CELERY__WORKER_LOG_SERVER_PORT: 8793
+    AIRFLOW__LOGGING__WORKER_LOG_SERVER_PORT: 8793
+    
+  volumes:
+    - ./dags:/opt/airflow/dags:ro
+    - ./plugins:/opt/airflow/plugins:ro
+  depends_on:
+    &airflow-common-depends-on
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  mc:
+    container_name: ${DOCKER_MINIO_MC_HOSTNAME}
+    image: minio/mc
+    volumes:
+      - ./minio-entrypoint.sh:/minio-entrypoint.sh:ro
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      MINIO_DAGS_BUCKET: ${MINIO_DAGS_BUCKET}
+      MINIO_LOGS_BUCKET: ${MINIO_LOGS_BUCKET}
+      DOCKER_MINIO_HOSTNAME: ${DOCKER_MINIO_HOSTNAME}
+      DOCKER_MINIO_PORT: ${DOCKER_MINIO_PORT}
+      DOCKER_MINIO_INTERNAL_PORT: ${DOCKER_MINIO_INTERNAL_PORT}
+      DOCKER_MINIO_CONSOLE_INTERNAL_PORT: ${DOCKER_MINIO_CONSOLE_INTERNAL_PORT}
+    entrypoint: ["sh", "/minio-entrypoint.sh"]
+    depends_on:
+      - minio
+
+  minio:
+    container_name: ${DOCKER_MINIO_HOSTNAME}
+    image: minio/minio
+    ports:
+      - "${DOCKER_MINIO_PORT}:${DOCKER_MINIO_INTERNAL_PORT}"
+      - "${DOCKER_MINIO_CONSOLE_PORT}:${DOCKER_MINIO_CONSOLE_INTERNAL_PORT}"
+    environment:
+      MINIO_PORT: ${DOCKER_MINIO_PORT}
+      MINIO_CONSOLE_PORT: ${DOCKER_MINIO_CONSOLE_PORT}
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  postgres:
+    image: postgres:15
+    container_name: ${DOCKER_POSTGRES_HOSTNAME}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      retries: 5
+
+  redis:
+    container_name: ${DOCKER_REDIS_HOSTNAME}
+    image: redis:6
+    ports:
+      - "${DOCKER_REDIS_PORT}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: ${DOCKER_AIRFLOW_INIT_HOSTNAME}
+    command: init
+    environment:
+      <<: *airflow-common-env
+      # Admin user configuration
+      AIRFLOW_ADMIN_USERNAME: ${AIRFLOW_ADMIN_USERNAME}
+      AIRFLOW_ADMIN_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD}
+      AIRFLOW_ADMIN_EMAIL: ${AIRFLOW_ADMIN_EMAIL}
+      AIRFLOW_ADMIN_FIRSTNAME: ${AIRFLOW_ADMIN_FIRSTNAME}
+      AIRFLOW_ADMIN_LASTNAME: ${AIRFLOW_ADMIN_LASTNAME}
+      # MinIO for connection creation
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      DOCKER_MINIO_HOSTNAME: ${DOCKER_MINIO_HOSTNAME}
+      DOCKER_MINIO_PORT: ${DOCKER_MINIO_PORT}
+    depends_on:
+      <<: *airflow-common-depends-on
+      minio:
+        condition: service_started
+
+  api-server:
+    <<: *airflow-common
+    container_name: ${DOCKER_AIRFLOW_APISERVER_HOSTNAME}
+    command: api-server
+    ports:
+      - "${DOCKER_AIRFLOW_APISERVER_PORT}:8080"
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+      mc:
+        condition: service_completed_successfully
+
+  scheduler:
+    <<: *airflow-common
+    container_name: ${DOCKER_AIRFLOW_SCHEDULER_HOSTNAME}
+    command: scheduler
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+      api-server:
+        condition: service_started
+
+  dag-processor:
+    <<: *airflow-common
+    container_name: ${DOCKER_AIRFLOW_DAGPROCESSOR_HOSTNAME}
+    command: dag-processor
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  triggerer:
+    <<: *airflow-common
+    container_name: ${DOCKER_AIRFLOW_TRIGGERER_HOSTNAME}
+    command: triggerer
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  worker:
+    <<: *airflow-common
+    command: celery-worker
+    # ports:
+    #   - "8793:8793"
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+volumes:
+  minio_data:
+  postgres_data:
