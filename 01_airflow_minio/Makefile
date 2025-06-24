@@ -5,7 +5,7 @@ init: docker-compose.yml
 	docker-compose -f docker-compose.yml up -d --build
 
 start: docker-compose.yml
-	docker-compose -f docker-compose.yml up -d --build --scale airflow-init=0
+	docker-compose -f docker-compose.yml up -d --build --scale airflow-init=0 
 
 stop-and-remove: docker-compose.yml
 	docker-compose -f docker-compose.yml down -v

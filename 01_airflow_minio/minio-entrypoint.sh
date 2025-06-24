@@ -3,7 +3,7 @@ set -e
 
 echo "⏳ Attente de la disponibilité de MinIO..."
 
-until mc alias set local "http://${DOCKER_MINIO_HOSTNAME}:${DOCKER_MINIO_PORT}" ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+until mc alias set local "http://${DOCKER_MINIO_HOSTNAME}:${DOCKER_MINIO_INTERNAL_PORT}" ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
  do
   echo "⏱️ MinIO pas encore prêt, nouvelle tentative dans 2s..."
   sleep 2
@@ -57,7 +57,7 @@ mc admin user info local ${AWS_ACCESS_KEY_ID}
 
 # Alias temporaire pour tester l'accès avec l'utilisateur Airflow
 echo "🔐 Test d'accès en tant qu'utilisateur Airflow (${AWS_ACCESS_KEY_ID})..."
-mc alias set ${AWS_ACCESS_KEY_ID} "http://${DOCKER_MINIO_HOSTNAME}:${DOCKER_MINIO_PORT}" ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
+mc alias set ${AWS_ACCESS_KEY_ID} "http://${DOCKER_MINIO_HOSTNAME}:${DOCKER_MINIO_INTERNAL_PORT}" ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
 
 echo "📁 Listing des buckets pour vérifier l'accès :"
 mc ls ${AWS_ACCESS_KEY_ID}
