@@ -137,6 +137,8 @@ services:
     command: api-server
     ports:
       - "${DOCKER_AIRFLOW_APISERVER_PORT}:8080"
+    volumes:
+      - ./config/webserver_config.py:/opt/airflow/webserver_config.py:ro
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
