@@ -12,8 +12,6 @@ services:
       - LDAP_CUSTOM_LDIF_DIR=/docker-entrypoint-initdb.d
     ports:
       - "1389:1389"
-    networks:
-      - data-platform
     
   phpldapadmin:
     image: osixia/phpldapadmin:latest
@@ -23,12 +21,6 @@ services:
       PHPLDAPADMIN_HTTPS: false
       PHPLDAPADMIN_LDAP_CLIENT_TLS: 0
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - openldap
-    networks:
-      - data-platform
-
-networks:
-  data-platform:
-    driver: bridge
