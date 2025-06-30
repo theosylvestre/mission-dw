@@ -1,0 +1,41 @@
+# Groupe Data Engineers Production
+dn: cn=ROLE_DWH_DataEngineers_Prod,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_DataEngineers_Prod
+description: Data Engineers avec accès production DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr
+
+# Groupe Data Engineers Développement  
+dn: cn=ROLE_DWH_DataEngineers_Dev,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_DataEngineers_Dev
+description: Data Engineers avec accès développement DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr
+
+# Groupe Data Analysts Production
+dn: cn=ROLE_DWH_DataAnalysts_Prod,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_DataAnalysts_Prod
+description: Data Analysts avec accès lecture seule production DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr
+
+# Groupe Data Analysts Développement
+dn: cn=ROLE_DWH_DataAnalysts_Dev,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_DataAnalysts_Dev
+description: Data Analysts avec accès sandbox développement DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr
+
+# Groupe Administrateurs Base de Données
+dn: cn=ROLE_DWH_DBAdmins,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_DBAdmins
+description: Administrateurs base de données DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr
+
+# Groupe Utilisateurs Lecture Simple
+dn: cn=ROLE_DWH_Viewers,ou=roles,dc=snef,dc=fr
+objectClass: groupOfNames
+cn: ROLE_DWH_Viewers
+description: Utilisateurs avec accès lecture limitée DWH
+member: cn=dummy,ou=users,dc=snef,dc=fr

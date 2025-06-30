@@ -1,12 +1,7 @@
-# Ensuite vos OUs
-dn: ou=users,dc=snefmaintenance,dc=com
+dn: ou=roles,dc=snef,dc=fr
+objectClass: organizationalUnit
+ou: roles
+
+dn: ou=users,dc=snef,dc=fr
 objectClass: organizationalUnit
 ou: users
-
-dn: ou=groups,dc=snefmaintenance,dc=com
-objectClass: organizationalUnit  
-ou: groups
-
-dn: ou=services,dc=snefmaintenance,dc=com
-objectClass: organizationalUnit
-ou: services

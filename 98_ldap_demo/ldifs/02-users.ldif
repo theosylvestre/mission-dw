@@ -1,6 +1,14 @@
-dn: cn=john.doe,ou=users,dc=snefmaintenance,dc=com
+dn: cn=dummy,ou=users,dc=snef,dc=fr
 objectClass: inetOrgPerson
-cn: john.doe
-sn: Doe
-givenName: John
-mail: john.doe@snefmaintenance.com
+cn: dummy
+sn: Dummy
+givenName: Dummy
+mail: dummy@snef.fr
+
+dn: cn=theo.sylvestre,ou=users,dc=snef,dc=fr
+objectClass: inetOrgPerson
+cn: theo.sylvestre
+sn: Sylvestre
+givenName: Theo
+mail: theo.sylvestre@snef.fr
+

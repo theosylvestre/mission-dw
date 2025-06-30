@@ -1,0 +1,4 @@
+dn: cn=ROLE_DWH_DataEngineers_Prod,ou=roles,dc=snef,dc=fr
+changetype: modify
+add: member
+member: cn=theo.sylvestre,ou=users,dc=snef,dc=fr
