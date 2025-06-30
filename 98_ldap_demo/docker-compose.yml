@@ -1,0 +1,34 @@
+services:
+  openldap:
+    image: bitnami/openldap:2.6.6
+    container_name: openldap
+    restart: unless-stopped
+    volumes:
+      - ./ldifs:/docker-entrypoint-initdb.d
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpass
+      - LDAP_ROOT=dc=snefmaintenance,dc=com
+      - LDAP_CUSTOM_LDIF_DIR=/docker-entrypoint-initdb.d
+    ports:
+      - "1389:1389"
+    networks:
+      - data-platform
+    
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: ldap-admin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap://openldap:1389
+      PHPLDAPADMIN_HTTPS: false
+      PHPLDAPADMIN_LDAP_CLIENT_TLS: 0
+    ports:
+      - "8080:80"
+    depends_on:
+      - openldap
+    networks:
+      - data-platform
+
+networks:
+  data-platform:
+    driver: bridge

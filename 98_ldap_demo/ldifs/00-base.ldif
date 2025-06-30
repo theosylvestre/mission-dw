@@ -1,0 +1,7 @@
+# Créer la base DN d'abord
+dn: dc=snefmaintenance,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Example Organization
+dc: snefmaintenance

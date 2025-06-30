@@ -1,0 +1,6 @@
+dn: cn=john.doe,ou=users,dc=snefmaintenance,dc=com
+objectClass: inetOrgPerson
+cn: john.doe
+sn: Doe
+givenName: John
+mail: john.doe@snefmaintenance.com
