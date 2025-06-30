@@ -4,6 +4,8 @@ cn: dummy
 sn: Dummy
 givenName: Dummy
 mail: dummy@snef.fr
+userPassword:{SSHA}NMyRuZty+KRYNSoFcsVNw1RK+JmIbhOj
+# password de test dummy
 
 dn: cn=theo.sylvestre,ou=users,dc=snef,dc=fr
 objectClass: inetOrgPerson
@@ -11,4 +13,5 @@ cn: theo.sylvestre
 sn: Sylvestre
 givenName: Theo
 mail: theo.sylvestre@snef.fr
-
+userPassword:{SSHA}hGBOKQjuxIlehOsXQDE47GZt0beudozy
+# password de test theosylvestre
