@@ -5,11 +5,16 @@ services:
     restart: unless-stopped
     volumes:
       - ./ldifs:/docker-entrypoint-initdb.d
+      - ./certs:/opt/bitnami/openldap/certs
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpass
       - LDAP_ROOT=dc=snef,dc=fr
       - LDAP_CUSTOM_LDIF_DIR=/docker-entrypoint-initdb.d
+      - LDAP_ENABLE_TLS=yes
+      - LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/certs/openldap.crt
+      - LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/certs/openldap.key
+      - LDAP_TLS_CA_FILE=/opt/bitnami/openldap/certs/openldapCA.crt
     ports:
       - "1389:1389"
     
