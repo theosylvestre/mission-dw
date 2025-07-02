@@ -15,6 +15,10 @@ AUTH_LDAP_FIRSTNAME_FIELD = "givenName"
 AUTH_LDAP_LASTNAME_FIELD = "sn"
 AUTH_LDAP_EMAIL_FIELD = "mail"
 
+AUTH_LDAP_USE_TLS = True
+AUTH_LDAP_ALLOW_SELF_SIGNED = True
+AUTH_LDAP_TLS_CACERTFILE = "/etc/ssl/certs/openldapCA.crt"
+
 # Configuration des utilisateurs
 AUTH_USER_REGISTRATION = True
 AUTH_USER_REGISTRATION_ROLE = None  # Pas de rôle par défaut
@@ -71,6 +75,7 @@ class CustomSecurityManager(FabAirflowSecurityManagerOverride):
         try:
             # Connexion LDAP
             conn = ldap.initialize(AUTH_LDAP_SERVER)
+            conn.start_tls_s()
             conn.simple_bind_s(AUTH_LDAP_BIND_USER, AUTH_LDAP_BIND_PASSWORD)
             
             # Recherche de l'utilisateur
