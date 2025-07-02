@@ -5,27 +5,42 @@ services:
     restart: unless-stopped
     volumes:
       - ./ldifs:/docker-entrypoint-initdb.d
-      - ./certs:/opt/bitnami/openldap/certs
+      - ./certs_ldap:/opt/bitnami/openldap/certs
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpass
       - LDAP_ROOT=dc=snef,dc=fr
       - LDAP_CUSTOM_LDIF_DIR=/docker-entrypoint-initdb.d
+
       - LDAP_ENABLE_TLS=yes
       - LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/certs/openldap.crt
       - LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/certs/openldap.key
       - LDAP_TLS_CA_FILE=/opt/bitnami/openldap/certs/openldapCA.crt
+      - LDAP_REQUIRE_TLS=yes
+      - LDAP_TLS_VERIFY_CLIENT=never # Pour dev uniquement
     ports:
       - "1389:1389"
     
-  phpldapadmin:
-    image: osixia/phpldapadmin:latest
-    container_name: ldap-admin
-    environment:
-      PHPLDAPADMIN_LDAP_HOSTS: ldap://openldap:1389
-      PHPLDAPADMIN_HTTPS: false
-      PHPLDAPADMIN_LDAP_CLIENT_TLS: 0
-    ports:
-      - "80:80"
-    depends_on:
-      - openldap
+  # phpldapadmin:
+  #   image: osixia/phpldapadmin:latest
+  #   container_name: ldap-admin
+  #   environment:
+  #     # Configuration LDAP avec StartTLS
+  #     PHPLDAPADMIN_LDAP_HOSTS: ldap://openldap:1389
+  #     PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"                            # Active StartTLS
+  #     PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: openldapCA.crt
+  #     PHPLDAPADMIN_LDAP_CLIENT_TLS_REQCERT: "never"                # Ignore la vérification certificat
+      
+  #     # Configuration HTTPS pour l'interface web
+  #     PHPLDAPADMIN_HTTPS: true                                   # Active HTTPS pour l'interface
+  #     PHPLDAPADMIN_HTTPS_CRT_FILENAME: phpldapadmin.crt         # Certificat web
+  #     PHPLDAPADMIN_HTTPS_KEY_FILENAME: phpldapadmin.key         # Clé privée web
+  #     PHPLDAPADMIN_HTTPS_CA_CRT_FILENAME: openldapCA.crt        # CA
+  #   volumes:
+  #     - ./certs_phpldapadmin:/container/service/phpldapadmin/assets/apache2/certs
+  #     - ./servername.conf:/etc/apache2/conf-enabled/servername.conf:ro
+  #   ports:
+  #     - "80:80"      # HTTP (redirection vers HTTPS)
+  #     - "443:443"    # HTTPS sécurisé
+  #   depends_on:
+  #     - openldap
