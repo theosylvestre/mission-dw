@@ -39,7 +39,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags:ro
     - ./plugins:/opt/airflow/plugins:ro
     - ./config/webserver_config.py:/opt/airflow/webserver_config.py:ro
-    - ./certs:/etc/ssl/certs/ # Certificate for LDAP
+    - ../certs:/etc/ssl/certs/ # Certificate for LDAP
   depends_on:
     &airflow-common-depends-on
     postgres:

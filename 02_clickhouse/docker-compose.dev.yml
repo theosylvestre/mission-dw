@@ -11,7 +11,9 @@ services:
             - clickhouse-data:/var/lib/clickhouse/
             - clickhouse-logs:/var/log/clickhouse-server/
             - ./config_files/clickhouse/etc/clickhouse-server:/etc/clickhouse-server
-            - ./certs/:/etc/clickhouse-server/certs/
+            - ../certs/openldap.crt:/etc/clickhouse-server/certs/openldap.crt
+            - ../certs/openldap.key:/etc/clickhouse-server/certs/openldap.key
+            - ../certs/openldapCA.crt:/etc/clickhouse-server/certs/openldapCA.crt
         cap_add:
             - SYS_NICE
             - NET_ADMIN

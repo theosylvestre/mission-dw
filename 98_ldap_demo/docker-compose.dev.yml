@@ -5,7 +5,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./ldifs:/docker-entrypoint-initdb.d
-      - ./certs_ldap:/opt/bitnami/openldap/certs
+      - ../certs/openldap.crt:/opt/bitnami/openldap/certs/openldap.crt
+      - ../certs/openldap.key:/opt/bitnami/openldap/certs/openldap.key
+      - ../certs/openldapCA.crt:/opt/bitnami/openldap/certs/openldapCA.crt
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpass
@@ -20,27 +22,3 @@ services:
       - LDAP_TLS_VERIFY_CLIENT=never # Pour dev uniquement
     ports:
       - "1389:1389"
-    
-  # phpldapadmin:
-  #   image: osixia/phpldapadmin:latest
-  #   container_name: ldap-admin
-  #   environment:
-  #     # Configuration LDAP avec StartTLS
-  #     PHPLDAPADMIN_LDAP_HOSTS: ldap://openldap:1389
-  #     PHPLDAPADMIN_LDAP_CLIENT_TLS: "true"                            # Active StartTLS
-  #     PHPLDAPADMIN_LDAP_CLIENT_TLS_CA_CRT_FILENAME: openldapCA.crt
-  #     PHPLDAPADMIN_LDAP_CLIENT_TLS_REQCERT: "never"                # Ignore la vérification certificat
-      
-  #     # Configuration HTTPS pour l'interface web
-  #     PHPLDAPADMIN_HTTPS: true                                   # Active HTTPS pour l'interface
-  #     PHPLDAPADMIN_HTTPS_CRT_FILENAME: phpldapadmin.crt         # Certificat web
-  #     PHPLDAPADMIN_HTTPS_KEY_FILENAME: phpldapadmin.key         # Clé privée web
-  #     PHPLDAPADMIN_HTTPS_CA_CRT_FILENAME: openldapCA.crt        # CA
-  #   volumes:
-  #     - ./certs_phpldapadmin:/container/service/phpldapadmin/assets/apache2/certs
-  #     - ./servername.conf:/etc/apache2/conf-enabled/servername.conf:ro
-  #   ports:
-  #     - "80:80"      # HTTP (redirection vers HTTPS)
-  #     - "443:443"    # HTTPS sécurisé
-  #   depends_on:
-  #     - openldap

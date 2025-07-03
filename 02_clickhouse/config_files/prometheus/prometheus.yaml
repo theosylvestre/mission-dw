@@ -22,19 +22,19 @@ scrape_configs:
         - 'clickhouse:9363'
 
   - job_name: minio-job
-    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0NzAxM30.iosKwH89bONw3p0mHrtJEyi7OcuYDniJKQuTwiCSzAL33FBoScXTGgUZZeneWBZhAvBzru39nuHm_R6g-ennUA
+    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0OTY0MX0.1gYK9L5-GP1nI4kykEuEX178u_3p39gkOlkaI0XcizntJtTeu-Q1mz5Qd2jLOqCbIWJ2TiFBpaf_kh4N0cA0ew
     metrics_path: /minio/v2/metrics/cluster
     scheme: http
     static_configs:
     - targets: ['minio:9002']
   - job_name: minio-job-node
-    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0NzAxM30.iosKwH89bONw3p0mHrtJEyi7OcuYDniJKQuTwiCSzAL33FBoScXTGgUZZeneWBZhAvBzru39nuHm_R6g-ennUA
+    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0OTY0Mn0.hgzVLDsydMH2t0dGHfLhEX7IBfVjUJGIULlrAlkiiH-mX-IFXOoo7omS0cPo0YhLz0JL9_jp2rh2Y5as3EVX3Q
     metrics_path: /minio/v2/metrics/node
     scheme: http
     static_configs:
     - targets: ['minio:9002']
   - job_name: minio-job-bucket
-    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0NzAxNH0.kcqVOSeUd58qk_wO1sRJl2oQETpxX9OqaXj9kmK-WflOPjSw7zueK5U1_49wiLKpyt2I5VGr85lMhtW6oBVvLA
+    bearer_token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwcm9tZXRoZXVzIiwic3ViIjoibWluaW9hZG1pbiIsImV4cCI6NDkwNTE0OTY0M30._HPP8JJw-RES9WjNSm4USjmt53a7dxsTh4xDXSygueEuH1DYTPhlyU_dTDf81ZUE4SgIIPq4OIHp3eykXvATZA
     metrics_path: /minio/v2/metrics/bucket
     scheme: http
     static_configs:
