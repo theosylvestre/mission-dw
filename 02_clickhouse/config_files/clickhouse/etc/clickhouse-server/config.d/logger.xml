@@ -1,13 +1,16 @@
 <clickhouse>
-  <logger>
-    <level>trace</level>
-    <log>/var/log/clickhouse-server/clickhouse-server-%z-%A-%F.log</log>
-    <errorlog>/var/log/clickhouse-server/clickhouse-server-%z-%A-%F.err.log</errorlog>
-    <size>1000M</size>
-    <count>10</count>
-    <stream_compress>false</stream_compress>
-    <!-- Uncomment the following line for debugging purpose and also check the logger level -->
-    <console>1</console>
-    <!-- end comment -->
-  </logger>
+    <logger>
+        <level>debug</level>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>1000M</size>
+        <count>10</count>
+        <console>true</console>
+        
+        <!-- Logging spécifique pour LDAP -->
+        <logger name="ExternalAuthenticators" level="debug" />
+        <logger name="LDAPClient" level="debug" />
+        <logger name="AccessControl" level="debug" />
+        <logger name="Authentication" level="debug" />
+    </logger>
 </clickhouse>

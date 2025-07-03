@@ -11,6 +11,7 @@ services:
             - clickhouse-data:/var/lib/clickhouse/
             - clickhouse-logs:/var/log/clickhouse-server/
             - ./config_files/clickhouse/etc/clickhouse-server:/etc/clickhouse-server
+            - ./certs/:/etc/clickhouse-server/certs/
         cap_add:
             - SYS_NICE
             - NET_ADMIN
