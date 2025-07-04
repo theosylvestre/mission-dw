@@ -3,25 +3,30 @@ from airflow.providers.fab.auth_manager.security_manager.override import FabAirf
 import ldap
 import os
 
-# Configuration LDAP
+# Configuration LDAP - Lecture des variables d'environnement avec conversions de types
 AUTH_TYPE = AUTH_LDAP
-AUTH_LDAP_SERVER = "ldap://host.docker.internal:1389"
-AUTH_LDAP_BIND_USER = "cn=admin,dc=snef,dc=fr"
-AUTH_LDAP_BIND_PASSWORD = "adminpass"
-AUTH_LDAP_SEARCH = "ou=users,dc=snef,dc=fr"
-AUTH_LDAP_SEARCH_FILTER = "(objectClass=inetOrgPerson)"
-AUTH_LDAP_UID_FIELD = "cn"
-AUTH_LDAP_FIRSTNAME_FIELD = "givenName"
-AUTH_LDAP_LASTNAME_FIELD = "sn"
-AUTH_LDAP_EMAIL_FIELD = "mail"
+AUTH_LDAP_SERVER = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_SERVER')
+AUTH_LDAP_BIND_USER = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_BIND_USER')
+AUTH_LDAP_BIND_PASSWORD = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_BIND_PASSWORD')
+AUTH_LDAP_SEARCH = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_SEARCH')
+AUTH_LDAP_SEARCH_FILTER = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_SEARCH_FILTER')
+AUTH_LDAP_UID_FIELD = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_UID_FIELD')
+AUTH_LDAP_FIRSTNAME_FIELD = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_FIRSTNAME_FIELD')
+AUTH_LDAP_LASTNAME_FIELD = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_LASTNAME_FIELD')
+AUTH_LDAP_EMAIL_FIELD = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_EMAIL_FIELD')
 
-AUTH_LDAP_USE_TLS = True
-AUTH_LDAP_ALLOW_SELF_SIGNED = True
-AUTH_LDAP_TLS_CACERTFILE = "/etc/ssl/certs/openldapCA.crt"
+# Variables booléennes avec conversion correcte
+AUTH_LDAP_USE_TLS = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_USE_TLS', 'True').lower() in ('true', '1', 't', 'yes')
+AUTH_LDAP_ALLOW_SELF_SIGNED = os.environ.get('AIRFLOW__FAB__AUTH_LDAP_ALLOW_SELF_SIGNED', 'True').lower() in ('true', '1', 't', 'yes')
+AUTH_USER_REGISTRATION = os.environ.get('AIRFLOW__FAB__AUTH_USER_REGISTRATION', 'True').lower() in ('true', '1', 't', 'yes')
+AUTH_ROLES_SYNC_AT_LOGIN = os.environ.get('AIRFLOW__FAB__AUTH_ROLES_SYNC_AT_LOGIN', 'True').lower() in ('true', '1', 't', 'yes')
 
-# Configuration des utilisateurs
-AUTH_USER_REGISTRATION = True
-AUTH_USER_REGISTRATION_ROLE = None  # Pas de rôle par défaut
+# Rôle par défaut - gestion spéciale pour None
+auth_user_registration_role_env = os.environ.get('AIRFLOW__FAB__AUTH_USER_REGISTRATION_ROLE', 'None')
+if auth_user_registration_role_env.lower() in ('none', 'null', ''):
+    AUTH_USER_REGISTRATION_ROLE = None
+else:
+    AUTH_USER_REGISTRATION_ROLE = auth_user_registration_role_env
 
 # Mapping des groupes LDAP vers rôles Airflow
 AUTH_ROLES_MAPPING = {
@@ -30,9 +35,6 @@ AUTH_ROLES_MAPPING = {
     "cn=ROLE_DWH_DBAdmins,ou=roles,dc=snef,dc=fr": ["Admin"],
     "cn=ROLE_DWH_Viewers,ou=roles,dc=snef,dc=fr": ["Viewer"]
 }
-
-# Synchronisation automatique des rôles
-AUTH_ROLES_SYNC_AT_LOGIN = True
 
 class CustomSecurityManager(FabAirflowSecurityManagerOverride):
     def __init__(self, appbuilder):
@@ -61,8 +63,17 @@ class CustomSecurityManager(FabAirflowSecurityManagerOverride):
             # Assigner les rôles à l'utilisateur
             if airflow_roles:
                 user.roles = airflow_roles
-                self.get_session.commit()
-                print(f"DEBUG: Roles assigned to user {username}: {[r.name for r in user.roles]}")
+                # Correction de l'accès à la session
+                try:
+                    if hasattr(self, 'get_session') and self.get_session:
+                        self.get_session.commit()
+                    elif hasattr(self.appbuilder, 'get_session'):
+                        self.appbuilder.get_session.commit()
+                    else:
+                        print("WARNING: Unable to commit session - session not available")
+                    print(f"DEBUG: Roles assigned to user {username}: {[r.name for r in user.roles]}")
+                except Exception as e:
+                    print(f"ERROR: Failed to commit session: {e}")
             else:
                 print(f"DEBUG: No roles found for user {username}")
                 
@@ -73,13 +84,31 @@ class CustomSecurityManager(FabAirflowSecurityManagerOverride):
         Récupère les groupes LDAP d'un utilisateur
         """
         try:
+            # Vérification que les variables sont bien définies
+            if not all([AUTH_LDAP_SERVER, AUTH_LDAP_BIND_USER, AUTH_LDAP_BIND_PASSWORD]):
+                print("ERROR: Missing LDAP configuration variables")
+                return []
+            
+            print(f"DEBUG: Connecting to LDAP server: {AUTH_LDAP_SERVER}")
+            
             # Connexion LDAP
             conn = ldap.initialize(AUTH_LDAP_SERVER)
-            conn.start_tls_s()
+            
+            # Gestion TLS conditionnelle
+            if AUTH_LDAP_USE_TLS:
+                try:
+                    conn.start_tls_s()
+                    print("DEBUG: TLS connection established")
+                except Exception as tls_error:
+                    print(f"WARNING: TLS failed, continuing without: {tls_error}")
+            
             conn.simple_bind_s(AUTH_LDAP_BIND_USER, AUTH_LDAP_BIND_PASSWORD)
             
             # Recherche de l'utilisateur
             user_filter = f"(&(objectClass=inetOrgPerson)({AUTH_LDAP_UID_FIELD}={username}))"
+            print(f"DEBUG: User filter: {user_filter}")
+            print(f"DEBUG: Searching in: {AUTH_LDAP_SEARCH}")
+            
             user_result = conn.search_s(
                 AUTH_LDAP_SEARCH,
                 ldap.SCOPE_SUBTREE,
@@ -117,6 +146,8 @@ class CustomSecurityManager(FabAirflowSecurityManagerOverride):
         try:
             groups = []
             group_filter = f"(&(objectClass=groupOfNames)(member=cn={username},ou=users,dc=snef,dc=fr))"
+            print(f"DEBUG: Group filter: {group_filter}")
+            
             group_results = conn.search_s(
                 "ou=roles,dc=snef,dc=fr",
                 ldap.SCOPE_SUBTREE,
@@ -127,6 +158,7 @@ class CustomSecurityManager(FabAirflowSecurityManagerOverride):
             for group_dn, group_attrs in group_results:
                 if group_dn:
                     groups.append(group_dn)
+                    print(f"DEBUG: Found group: {group_dn}")
                     
             return groups
             
